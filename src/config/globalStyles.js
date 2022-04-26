@@ -7,9 +7,10 @@ export default createGlobalStyle`
    outline: 0;
    box-sizing: border-box;
   }
-
+  
   html, body, #root {
     min-height: 100%;
+    font-family: "Roboto", sans-serif;
   }
 
   body {

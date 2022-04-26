@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   AppBar,
   Box,
-  CssBaseline,
   Divider,
   Drawer,
   IconButton,
@@ -10,17 +9,47 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Menu,
+  MenuItem,
   Toolbar,
+  Tooltip,
   Typography,
+  Avatar,
+  Fab,
+  Badge,
 } from "@mui/material";
-import { MailOutline, Menu } from "@mui/icons-material";
 
-import { Container } from "./styles";
+import { styled } from "@mui/material/styles";
+import { Menu as MenuIcon } from "@mui/icons-material";
+import {
+  Edit,
+  MailOutline,
+  PhotoCamera,
+  Settings,
+  Logout,
+} from "@mui/icons-material";
+import colors from "../../config/colors";
+
+const Input = styled("input")({
+  display: "none",
+  width: 0,
+  height: 0,
+});
 
 const menuWidth = 240;
 
 function Dashboard({ window }) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [anchorAvatar, setAnchorAvatar] = useState(null);
+  const open = Boolean(anchorAvatar);
+
+  const handleClickAvatar = event => {
+    setAnchorAvatar(event.currentTarget);
+  };
+
+  const handleCloseAvatar = () => {
+    setAnchorAvatar(null);
+  };
 
   const handleMenuToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -33,7 +62,7 @@ function Dashboard({ window }) {
       <List>
         <ListItemButton>
           <ListItemIcon>
-            <MailOutline size={20} sx={{ fontSize: 40 }} />
+            <MailOutline />
           </ListItemIcon>
           <ListItemText primary="Teste" />
         </ListItemButton>
@@ -42,7 +71,7 @@ function Dashboard({ window }) {
       <List>
         <ListItemButton>
           <ListItemIcon>
-            <MailOutline size={20} sx={{ fontSize: 40 }} />
+            <MailOutline />
           </ListItemIcon>
           <ListItemText primary="Teste 2" />
         </ListItemButton>
@@ -55,25 +84,117 @@ function Dashboard({ window }) {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <CssBaseline />
       <AppBar
         position="fixed"
         sx={{
           width: { sm: `calc(100% - ${menuWidth}px)` },
           ml: { sm: `${menuWidth}px` },
         }}>
-        <Toolbar>
+        <Toolbar
+          sx={{
+            backgroundColor: colors.background,
+            color: colors.dark,
+          }}>
           <IconButton
             color="inherit"
             aria-label="abrir menu"
             edge="start"
             onClick={handleMenuToggle}
             sx={{ mr: 2, display: { sm: "none" } }}>
-            <Menu />
+            <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Responsive drawer
-          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flex: 1,
+              alignItems: "center",
+              justifyContent: "flex-end",
+            }}>
+            <Typography
+              variant="h6"
+              noWrap
+              sx={{ flex: 1, alignSelf: "flex-start", color: "#5E6366" }}>
+              Dashboard
+            </Typography>
+            <Typography noWrap sx={{ flex: 2 }}>
+              Barbearia do Benjamin
+            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                textAlign: "center",
+              }}>
+              <Tooltip title="Sua Conta">
+                <IconButton
+                  onClick={handleClickAvatar}
+                  size="small"
+                  sx={{ ml: 2 }}
+                  aria-controls={open ? "account-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? "true" : undefined}>
+                  <Avatar
+                    src={require("../../assets/avatar.jpg")}
+                    alt="Perfil"
+                  />
+                </IconButton>
+              </Tooltip>
+            </Box>
+            <Menu
+              anchorEl={anchorAvatar}
+              id="account-menu"
+              open={open}
+              onClose={handleCloseAvatar}
+              onClick={handleCloseAvatar}
+              PaperProps={{
+                elevation: 0,
+                sx: {
+                  overflow: "visible",
+                  filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                  mt: 1.5,
+                  "& .MuiAvatar-root": {
+                    width: 32,
+                    height: 32,
+                    ml: -0.5,
+                    mr: 1,
+                  },
+                  "&:before": {
+                    content: '""',
+                    display: "block",
+                    position: "absolute",
+                    top: 0,
+                    right: 14,
+                    width: 10,
+                    height: 10,
+                    bgcolor: "background.paper",
+                    transform: "translateY(-50%) rotate(45deg)",
+                    zIndex: 0,
+                  },
+                },
+              }}
+              transformOrigin={{ horizontal: "right", vertical: "top" }}
+              anchorOrigin={{ horizontal: "right", vertical: "bottom" }}>
+              <MenuItem>
+                <Avatar /> Perfil
+              </MenuItem>
+              <MenuItem>
+                <Avatar /> Conta
+              </MenuItem>
+              <Divider />
+              <MenuItem>
+                <ListItemIcon>
+                  <Settings fontSize="small" />
+                </ListItemIcon>
+                Configurações
+              </MenuItem>
+              <MenuItem>
+                <ListItemIcon>
+                  <Logout fontSize="small" />
+                </ListItemIcon>
+                Sair
+              </MenuItem>
+            </Menu>
+          </Box>
         </Toolbar>
       </AppBar>
       <Box
@@ -100,6 +221,36 @@ function Dashboard({ window }) {
             "& .MuiDrawer-paper": { boxSizing: "border-box", width: menuWidth },
           }}
           open>
+          <Badge
+            overlap="circular"
+            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+            badgeContent={
+              <IconButton alt="Editar">
+                <label
+                  htmlFor="icon-button-file"
+                  style={{ margin: 0, padding: 0 }}>
+                  <Input accept="image/*" id="icon-button-file" type="file" />
+                  <Edit color="primary" />
+                </label>
+              </IconButton>
+            }
+            sx={{ marginRight: -1 }}>
+            <Avatar
+              src={require("../../assets/logo.jpg")}
+              alt="Logo Lojista"
+              variant="square"
+              sx={{
+                minWidth: menuWidth - 2,
+                minHeight: 140,
+              }}>
+              <Fab>
+                <label htmlFor="icon-button-file" style={{ paddingTop: 6 }}>
+                  <Input accept="image/*" id="icon-button-file" type="file" />
+                  <PhotoCamera color="primary" />
+                </label>
+              </Fab>
+            </Avatar>
+          </Badge>
           {menu}
         </Drawer>
       </Box>
