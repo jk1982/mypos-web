@@ -12,7 +12,7 @@ const Input = styled("input")({
   height: 0,
 });
 
-function LeftBar({ window, minWidth }) {
+function LeftBar({ minWidth }) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleMenuToggle = () => {
@@ -20,9 +20,7 @@ function LeftBar({ window, minWidth }) {
   };
 
   const container =
-    window !== undefined ? () => window().document.body : undefined;
-
-  console.log(container);
+    window !== undefined ? () => window.document.body : undefined;
 
   return (
     <Box
@@ -39,6 +37,7 @@ function LeftBar({ window, minWidth }) {
         sx={{
           display: { xs: "block", sm: "none" },
           "& .MuiDrawer-paper": { boxSizing: "border-box", width: minWidth },
+          "& .MuiDrawer-paper": { borderWidth: 0 },
         }}>
         {<MainMenu />}
       </Drawer>
@@ -47,6 +46,7 @@ function LeftBar({ window, minWidth }) {
         sx={{
           display: { xs: "none", sm: "block" },
           "& .MuiDrawer-paper": { boxSizing: "border-box", width: minWidth },
+          "& .MuiDrawer-paper": { borderWidth: 0 },
         }}
         open>
         <Badge

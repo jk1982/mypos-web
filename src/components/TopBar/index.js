@@ -16,8 +16,12 @@ function TopBar({ title, style }) {
   return (
     <AppBar
       position="fixed"
+      elevation={0}
       sx={{
         ...style,
+        "& .MuiToolbar-root": {
+          borderBottom: "1px dashed rgba(193, 193, 193, 0.4)",
+        },
       }}>
       <Toolbar
         sx={{
@@ -39,12 +43,6 @@ function TopBar({ title, style }) {
             alignItems: "center",
             justifyContent: "flex-end",
           }}>
-          <Typography
-            variant="h6"
-            noWrap
-            sx={{ flex: 1, alignSelf: "flex-start", color: "#5E6366" }}>
-            Dashboard
-          </Typography>
           <Typography noWrap sx={{ flex: 2 }}>
             {title}
           </Typography>

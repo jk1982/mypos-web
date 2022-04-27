@@ -81,9 +81,6 @@ function TopAvatarMenu() {
         <MenuItem>
           <Avatar /> Perfil
         </MenuItem>
-        <MenuItem>
-          <Avatar /> Conta
-        </MenuItem>
         <Divider />
         <MenuItem>
           <ListItemIcon>

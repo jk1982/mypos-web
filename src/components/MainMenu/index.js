@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Divider,
   List,
   ListItemButton,
   ListItemIcon,
@@ -8,29 +7,36 @@ import {
   Toolbar,
 } from "@mui/material";
 
-import { MailOutline } from "@mui/icons-material";
+import {
+  BarChart,
+  GridOn,
+  Group,
+  PrintRounded,
+  Savings,
+} from "@mui/icons-material";
+
+const Item = ({ title, icon }) => {
+  return (
+    <ListItemButton>
+      <ListItemIcon>{icon}</ListItemIcon>
+      <ListItemText
+        primary={title}
+        sx={{ "& .MuiTypography-root": { fontFamily: "Quicksand" } }}
+      />
+    </ListItemButton>
+  );
+};
 
 function MainMenu() {
   return (
     <div>
       <Toolbar />
-      <Divider />
       <List>
-        <ListItemButton>
-          <ListItemIcon>
-            <MailOutline />
-          </ListItemIcon>
-          <ListItemText primary="Teste" />
-        </ListItemButton>
-      </List>
-      <Divider />
-      <List>
-        <ListItemButton>
-          <ListItemIcon>
-            <MailOutline />
-          </ListItemIcon>
-          <ListItemText primary="Teste 2" />
-        </ListItemButton>
+        <Item title="Dashboard" icon={<BarChart />} />
+        <Item title="Faturamento" icon={<Savings />} />
+        <Item title="Colaboradores" icon={<Group />} />
+        <Item title="Relatórios" icon={<PrintRounded />} />
+        <Item title="Estoque" icon={<GridOn />} />
       </List>
     </div>
   );
