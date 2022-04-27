@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { AppBar, Box, IconButton, Typography, Toolbar } from "@mui/material";
 import { Menu as MenuIcon } from "@mui/icons-material";
@@ -6,13 +6,7 @@ import { Menu as MenuIcon } from "@mui/icons-material";
 import TopAvatarMenu from "../TopAvatarMenu";
 import colors from "../../config/colors";
 
-function TopBar({ title, style }) {
-  const [mobileOpen, setMobileOpen] = useState(false);
-
-  const handleMenuToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
-
+function TopBar({ title, style, handleMenuToggle }) {
   return (
     <AppBar
       position="fixed"

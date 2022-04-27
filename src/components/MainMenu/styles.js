@@ -34,6 +34,6 @@ export const BottomButtons = styled.div`
   flex: 1;
   flex-direction: row;
   justify-content: flex-end;
-  padding-left: 5px;
+  padding-right: 5px;
   padding-top: 10px;
 `;

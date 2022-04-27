@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { Avatar, Badge, Box, Drawer, Fab, IconButton } from "@mui/material";
 import { Edit, PhotoCamera } from "@mui/icons-material";
@@ -12,13 +12,7 @@ const Input = styled("input")({
   height: 0,
 });
 
-function LeftBar({ minWidth }) {
-  const [mobileOpen, setMobileOpen] = useState(false);
-
-  const handleMenuToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
-
+function LeftBar({ minWidth, handleMenuToggle, mobileOpen }) {
   const container =
     window !== undefined ? () => window.document.body : undefined;
 
