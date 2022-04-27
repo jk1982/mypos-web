@@ -7,6 +7,7 @@ import { CssBaseline } from "@mui/material";
 const theme = createTheme({
   typography: {
     fontFamily: '"Roboto"',
+    fontSize: 12,
   },
 });
 

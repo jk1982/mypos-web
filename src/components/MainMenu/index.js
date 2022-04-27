@@ -1,44 +1,56 @@
 import React from "react";
-import {
-  List,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Toolbar,
-} from "@mui/material";
-
+import { Button, ListItemText, Divider, ListItemIcon } from "@mui/material";
 import {
   BarChart,
   GridOn,
   Group,
+  HelpOutline,
+  MenuBookOutlined,
   PrintRounded,
   Savings,
+  Settings,
 } from "@mui/icons-material";
 
-const Item = ({ title, icon }) => {
+import {
+  AppMenu,
+  BottomButtons,
+  Container,
+  CustomListItemButton,
+} from "./styles";
+
+const Item = ({ title, subTitle, icon, selected }) => {
   return (
-    <ListItemButton>
+    <CustomListItemButton selected={selected}>
       <ListItemIcon>{icon}</ListItemIcon>
-      <ListItemText
-        primary={title}
-        sx={{ "& .MuiTypography-root": { fontFamily: "Quicksand" } }}
-      />
-    </ListItemButton>
+      <ListItemText primary={title} secondary={subTitle} />
+    </CustomListItemButton>
   );
 };
 
 function MainMenu() {
   return (
-    <div>
-      <Toolbar />
-      <List>
-        <Item title="Dashboard" icon={<BarChart />} />
+    <Container>
+      <AppMenu>
+        <Item title="Dashboard" icon={<BarChart />} selected />
         <Item title="Faturamento" icon={<Savings />} />
         <Item title="Colaboradores" icon={<Group />} />
         <Item title="Relatórios" icon={<PrintRounded />} />
         <Item title="Estoque" icon={<GridOn />} />
-      </List>
-    </div>
+      </AppMenu>
+      <AppMenu bottomMenu={true}>
+        <Item title="Configurações" icon={<Settings />} />
+        <Divider light variant="middle" />
+        <Item title="Manual" icon={<MenuBookOutlined />} />
+        <Divider light variant="middle" />
+        <Item title="Suporte ao Usuário" icon={<HelpOutline />} />
+        <Divider />
+        <BottomButtons>
+          <Button variant="outlined" disableElevation size="small">
+            Contrato
+          </Button>
+        </BottomButtons>
+      </AppMenu>
+    </Container>
   );
 }
 
