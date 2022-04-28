@@ -5,7 +5,6 @@ import {
   Divider,
   IconButton,
   ListItemIcon,
-  Menu,
   MenuItem,
   Tooltip,
 } from "@mui/material";
@@ -42,7 +41,7 @@ function TopAvatarMenu() {
             aria-controls={open ? "account-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}>
-            <Avatar src={require("../../assets/avatar.jpg")} alt="Perfil" />
+            <Avatar src={require("../../../assets/avatar.jpg")} alt="Perfil" />
           </IconButton>
         </Tooltip>
       </Box>

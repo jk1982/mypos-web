@@ -4,7 +4,7 @@ import { AppBar, Box, IconButton, Typography, Toolbar } from "@mui/material";
 import { Menu as MenuIcon } from "@mui/icons-material";
 
 import TopAvatarMenu from "../TopAvatarMenu";
-import colors from "../../config/colors";
+import colors from "../../../config/colors";
 
 function TopBar({ title, style, handleMenuToggle }) {
   return (

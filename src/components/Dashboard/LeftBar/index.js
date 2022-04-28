@@ -47,18 +47,18 @@ function LeftBar({ minWidth, handleMenuToggle, mobileOpen }) {
           overlap="circular"
           anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
           badgeContent={
-            <IconButton alt="Editar">
+            <IconButton alt="Editar Logo" size="small">
               <label
                 htmlFor="icon-button-file"
                 style={{ margin: 0, padding: 0 }}>
                 <Input accept="image/*" id="icon-button-file" type="file" />
-                <Edit color="primary" />
+                <Edit />
               </label>
             </IconButton>
           }
           sx={{ marginRight: -1 }}>
           <Avatar
-            src={require("../../assets/logo.jpg")}
+            src={require("../../../assets/logo.jpg")}
             alt="Logo Lojista"
             variant="square"
             sx={{

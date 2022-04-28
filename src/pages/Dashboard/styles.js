@@ -1,5 +1,9 @@
 import styled from "@emotion/styled";
 
-export const ActionsLogo = styled.div`
-  background-color: "red";
+export const Container = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 `;
