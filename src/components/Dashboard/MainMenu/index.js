@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Button, ListItemText, Divider, ListItemIcon } from "@mui/material";
 import {
   BarChart,
@@ -18,9 +19,16 @@ import {
   CustomListItemButton,
 } from "./styles";
 
-const Item = ({ title, subTitle, icon, selected }) => {
+import { dashboardPaths } from "../../../routes/ApplicationRoutes";
+
+const Item = ({ title, subTitle, icon, path }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   return (
-    <CustomListItemButton selected={selected}>
+    <CustomListItemButton
+      onClick={() => navigate(path)}
+      selected={location.pathname === path}>
       <ListItemIcon>{icon}</ListItemIcon>
       <ListItemText primary={title} secondary={subTitle} />
     </CustomListItemButton>
@@ -28,14 +36,26 @@ const Item = ({ title, subTitle, icon, selected }) => {
 };
 
 function MainMenu() {
+  let paths = dashboardPaths;
+
   return (
     <Container>
       <AppMenu>
-        <Item title="Dashboard" icon={<BarChart />} selected />
-        <Item title="Colaboradores" icon={<Group />} />
+        {paths.map(item => {
+          return (
+            <Item
+              key={item.path}
+              title={item.name}
+              icon={item.icon}
+              path={item.path}
+            />
+          );
+        })}
+        {/* <Item title="Dashboard" icon={<BarChart />} path="/" />
+        <Item title="Colaboradores" icon={<Group />} path="employees" />
         <Item title="Faturamento" icon={<Savings />} />
         <Item title="Relatórios" icon={<PrintRounded />} />
-        <Item title="Estoque" icon={<GridOn />} />
+        <Item title="Estoque" icon={<GridOn />} /> */}
       </AppMenu>
       <AppMenu bottomMenu={true}>
         <Item title="Configurações" icon={<Settings />} />

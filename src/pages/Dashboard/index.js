@@ -1,32 +1,17 @@
 import React, { useState } from "react";
-import {
-  Box,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+import { Outlet } from "react-router-dom";
+import { Box, Toolbar } from "@mui/material";
 
 import TopBar from "../../components/Dashboard/TopBar";
 import LeftBar from "../../components/Dashboard/LeftBar";
-import { Container } from "./styles";
-import StatsPanel from "../../components/Dashboard/StatsPanel";
-import EmployeesPanel from "../../components/Dashboard/EmployeesPanel";
 
 const menuWidth = 240;
 
 function Dashboard() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [period, setPeriod] = useState("hoje");
 
   const handleMenuToggle = () => {
     setMobileOpen(!mobileOpen);
-  };
-
-  const handlePeriodChange = event => {
-    setPeriod(event.target.value);
   };
 
   return (
@@ -53,24 +38,7 @@ function Dashboard() {
           paddingLeft: 10,
         }}>
         <Toolbar />
-        <Container style={{ marginBottom: 20 }}>
-          <Typography variant="h4">Dashboard</Typography>
-          <FormControl sx={{ minWidth: 120 }} size="small">
-            <InputLabel id="period-select">Período</InputLabel>
-            <Select
-              id="period-select"
-              labelId="period-select"
-              value={period}
-              label="Período"
-              onChange={handlePeriodChange}>
-              <MenuItem value="hoje">Hoje</MenuItem>
-              <MenuItem value="semana">Semana</MenuItem>
-              <MenuItem value="mes">Mês</MenuItem>
-            </Select>
-          </FormControl>
-        </Container>
-        <StatsPanel />
-        <EmployeesPanel />
+        <Outlet />
       </Box>
     </Box>
   );

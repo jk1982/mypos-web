@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import moment from "moment";
-import { Route, Routes } from "react-router-dom";
 
 import AuthContext from "../auth/context";
 import cache from "../utils/cache";
-import Dashboard from "../pages/Dashboard";
-import LoginPage from "../pages/Login";
-import RecoveryPassword from "../pages/RecoveryPassword";
-import ResetPassword from "../pages/ResetPassword";
+
+import { ApplicationRoutes } from "./ApplicationRoutes";
+import { AuthenticationRoutes } from "./AuthenticationRoutes";
 
 function AppRoutes() {
   const [user, setUser] = useState();
@@ -25,17 +23,7 @@ function AppRoutes() {
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
-      {!user ? (
-        <Routes>
-          <Route path="/" element={<Dashboard />}></Route>
-        </Routes>
-      ) : (
-        <Routes>
-          <Route index path="/" element={<LoginPage />}></Route>
-          <Route path="recoverypassword" element={<RecoveryPassword />}></Route>
-          <Route path="resetpassword" element={<ResetPassword />}></Route>
-        </Routes>
-      )}
+      {!user ? <ApplicationRoutes /> : <AuthenticationRoutes />}
     </AuthContext.Provider>
   );
 }
