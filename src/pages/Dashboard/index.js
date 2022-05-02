@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Box,
-  Button,
   FormControl,
   InputLabel,
   MenuItem,
@@ -14,6 +13,7 @@ import TopBar from "../../components/Dashboard/TopBar";
 import LeftBar from "../../components/Dashboard/LeftBar";
 import { Container } from "./styles";
 import StatsPanel from "../../components/Dashboard/StatsPanel";
+import EmployeesPanel from "../../components/Dashboard/EmployeesPanel";
 
 const menuWidth = 240;
 
@@ -70,6 +70,7 @@ function Dashboard() {
           </FormControl>
         </Container>
         <StatsPanel />
+        <EmployeesPanel />
       </Box>
     </Box>
   );

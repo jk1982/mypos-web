@@ -32,8 +32,8 @@ function MainMenu() {
     <Container>
       <AppMenu>
         <Item title="Dashboard" icon={<BarChart />} selected />
-        <Item title="Faturamento" icon={<Savings />} />
         <Item title="Colaboradores" icon={<Group />} />
+        <Item title="Faturamento" icon={<Savings />} />
         <Item title="Relatórios" icon={<PrintRounded />} />
         <Item title="Estoque" icon={<GridOn />} />
       </AppMenu>

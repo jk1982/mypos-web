@@ -1,59 +1,48 @@
 import React from "react";
-import { Button, Box, Typography } from "@mui/material";
-import { Container } from "./styles";
+import { Box, Typography } from "@mui/material";
+import { AreaButton, Container } from "./styles";
 
 import colors from "../../../config/colors";
 
-const StatsItem = ({ title, value, color, isCurrency = true }) => {
-  const options = isCurrency
-    ? { maximumFractionDigits: 0, style: "currency", currency: "BRL" }
-    : { maximumSignificantDigits: 4 };
+const StatsItem = ({ title, value, color, style = "decimal" }) => {
+  const options =
+    style === "currency"
+      ? { maximumFractionDigits: 0, style, currency: "BRL" }
+      : { maximumSignificantDigits: 4, style };
 
   return (
-    <Button
-      sx={{
-        backgroundColor: colors.light,
-        borderRadius: 3,
-        "& .MuiTypography-root": { textTransform: "none" },
-        marginRight: 5,
-        minWidth: 150,
-        minHeight: 120,
-      }}>
+    <AreaButton valueColor={color}>
       <Box>
-        <Typography
-          variant="h6"
-          sx={{
-            textAlign: "left",
-            alignSelf: "flex-start",
-            color: colors.dark,
-            fontFamily: "Quicksand",
-          }}>
-          {title}
-        </Typography>
-        <Typography variant="h3" sx={{ p: 1, fontWeight: "bold", color }}>
+        <Typography variant="h6">{title}</Typography>
+        <Typography variant="h3">
           {new Intl.NumberFormat("pt-BR", options).format(value)}
         </Typography>
       </Box>
-    </Button>
+    </AreaButton>
   );
 };
 
 function StatsPanel() {
   return (
     <Container>
-      <StatsItem title="Total do Período" value={10254} color={colors.danger} />
-      <StatsItem title="Previsto" value={209} color={colors.blue} />
       <StatsItem
-        title="Agendados"
-        value={27}
-        color={colors.success}
-        isCurrency={false}
+        title="Total do Período"
+        value={10254}
+        color={colors.danger}
+        style="currency"
       />
       <StatsItem
-        title="Engajamentos"
-        value={114}
+        title="Previsto"
+        value={209}
+        color={colors.blue}
+        style="currency"
+      />
+      <StatsItem title="Agendados" value={27} color={colors.success} />
+      <StatsItem
+        title="Engajamento"
+        value={67 / 100}
         color={colors.warning}
-        isCurrency={false}
+        style="percent"
       />
     </Container>
   );
