@@ -22,7 +22,7 @@ function AppRoutes() {
   } else cache.store(cache.keys.currentUser, user);
 
   return (
-    <AuthContext.Provider value={{ user, setUser }}>
+    <AuthContext.Provider value={[user, setUser]}>
       {!user ? <ApplicationRoutes /> : <AuthenticationRoutes />}
     </AuthContext.Provider>
   );

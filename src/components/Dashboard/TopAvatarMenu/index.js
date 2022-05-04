@@ -9,7 +9,7 @@ import {
   Tooltip,
 } from "@mui/material";
 
-import { Logout, Settings } from "@mui/icons-material";
+import { Logout, Settings, Store } from "@mui/icons-material";
 
 import { AvatarContextMenu } from "./styles";
 
@@ -53,6 +53,13 @@ function TopAvatarMenu() {
         onClick={handleCloseAvatar}>
         <MenuItem>
           <Avatar /> Perfil
+        </MenuItem>
+        <Divider />
+        <MenuItem>
+          <ListItemIcon>
+            <Store fontSize="small" />
+          </ListItemIcon>
+          Minha Loja
         </MenuItem>
         <Divider />
         <MenuItem>
