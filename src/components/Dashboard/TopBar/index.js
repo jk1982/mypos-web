@@ -1,12 +1,22 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-import { AppBar, Box, IconButton, Typography, Toolbar } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  IconButton,
+  Typography,
+  Toolbar,
+  Button,
+} from "@mui/material";
 import { Menu as MenuIcon } from "@mui/icons-material";
 
 import TopAvatarMenu from "../TopAvatarMenu";
 import colors from "../../../config/colors";
 
 function TopBar({ title, style, handleMenuToggle }) {
+  const navigate = useNavigate();
+
   return (
     <AppBar
       position="fixed"
@@ -40,6 +50,14 @@ function TopBar({ title, style, handleMenuToggle }) {
           <Typography noWrap sx={{ flex: 2 }}>
             {title}
           </Typography>
+          <Button
+            variant="contained"
+            disableElevation
+            size="medium"
+            color="warning"
+            onClick={() => navigate("/POS")}>
+            Abrir POS
+          </Button>
           <TopAvatarMenu />
         </Box>
       </Toolbar>

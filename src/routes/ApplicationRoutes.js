@@ -9,6 +9,7 @@ import EmployeesHome from "../pages/Employees/Home";
 import Reports from "../pages/Reports";
 import Sales from "../pages/Sales";
 import Stock from "../pages/Stock";
+import POS from "../pages/POS";
 
 export function ApplicationRoutes() {
   return (
@@ -23,6 +24,7 @@ export function ApplicationRoutes() {
         <Route path="/reports" element={<Reports />}></Route>
         <Route path="/stock" element={<Stock />}></Route>
       </Route>
+      <Route path="/POS" element={<POS />}></Route>
     </Routes>
   );
 }
