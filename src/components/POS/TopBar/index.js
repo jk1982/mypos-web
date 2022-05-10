@@ -48,7 +48,6 @@ export default function TopBar({ title }) {
           <Status style={{ flex: 2 }} />
           <Box
             sx={{
-              flex: 1,
               flexDirection: "row",
               justifyContent: "space-between",
             }}>
@@ -57,6 +56,7 @@ export default function TopBar({ title }) {
               disableElevation
               size="medium"
               color="warning"
+              sx={{ marginTop: "1vh" }}
               onClick={() => navigate("/")}>
               Sair
             </Button>

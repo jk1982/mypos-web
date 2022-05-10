@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import colors from "../../config/colors";
+import colors from "../../../config/colors";
 
 export const CardContainer = styled.div`
   background-color: ${props => (props.color ? props.color : colors.light)};

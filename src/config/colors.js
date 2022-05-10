@@ -9,4 +9,5 @@ export default {
   blue: "#367BF5",
   success: "#2FA84F",
   warning: "#F3AA18",
+  warningLight: "#F3E3C5",
 };
