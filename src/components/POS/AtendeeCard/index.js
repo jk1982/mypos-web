@@ -9,43 +9,38 @@ import {
   Typography,
 } from "@mui/material";
 
-import {
-  AddCircleOutline,
-  CalendarMonthOutlined,
-  CheckCircleOutlined,
-  HourglassBottomOutlined,
-  HourglassFullOutlined,
-  HourglassTopOutlined,
-  TimerOutlined,
-} from "@mui/icons-material";
+import { AddCircleOutline, CalendarMonthOutlined } from "@mui/icons-material";
 
 import { CardContainer, TagsComponent } from "./styles";
 import colors from "../../../config/colors";
 
-const startTime = "19:35";
-const duration = "40min";
+function getTaskColor(id) {
+  switch (id) {
+    case 1:
+      return colors.blue;
+    case 2:
+      return colors.danger;
+    case 3:
+      return colors.warning;
 
-function Card({
+    case 0:
+    default:
+      return colors.black;
+  }
+}
+
+function AtendeeCard({
   title,
   imgUrl = null,
-  tasksList = [{ name: "", color: "" }],
-  isActive = false,
+  tasksList = [],
+  scheduled = false,
   ...others
 }) {
-  let imgSource = undefined;
-
-  try {
-    imgSource = require(`../../../assets/${imgUrl}`);
-  } catch {
-    imgSource = undefined;
-  }
-
   return (
-    <CardContainer isActive={isActive} {...others}>
-      {isActive && <CheckCircleOutlined color="success" />}
+    <CardContainer {...others}>
       {imgUrl && (
         <Avatar
-          src={imgSource}
+          src={imgUrl}
           variant="circular"
           sx={{
             minWidth: "10vh",
@@ -63,7 +58,7 @@ function Card({
                 clickable={false}
                 variant="outlined"
                 label={task.name}
-                sx={{ color: task }}
+                sx={{ color: getTaskColor(task.id) }}
               />
             ))}
             <IconButton>
@@ -79,19 +74,21 @@ function Card({
           justifyContent: "flex-end",
           flexDirection: "column",
         }}>
-        <Box
-          sx={{
-            display: "flex",
-            flex: 1,
-            alignSelf: "flex-end",
-            alignItems: "flex-start",
-          }}>
-          <Tooltip title="Cliente Agendado">
-            <CalendarMonthOutlined
-              sx={{ color: colors.strong, marginRight: "3vh" }}
-            />
-          </Tooltip>
-        </Box>
+        {scheduled && (
+          <Box
+            sx={{
+              display: "flex",
+              flex: 1,
+              alignSelf: "flex-end",
+              alignItems: "flex-start",
+            }}>
+            <Tooltip title="Cliente Agendado">
+              <CalendarMonthOutlined
+                sx={{ color: colors.strong, marginRight: "3vh" }}
+              />
+            </Tooltip>
+          </Box>
+        )}
         <Box
           sx={{
             display: "flex",
@@ -102,8 +99,7 @@ function Card({
             variant="outlined"
             disableElevation
             size="medium"
-            color="success"
-            sx={{ visibility: isActive ? "hidden" : "visible" }}>
+            color="success">
             Fechar Comanda
           </Button>
           <Button
@@ -119,4 +115,4 @@ function Card({
   );
 }
 
-export default Card;
+export default AtendeeCard;
