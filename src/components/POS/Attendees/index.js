@@ -1,14 +1,36 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 
-import Card from "../Card";
 import colors from "../../../config/colors";
+import { FlashAutoOutlined, PersonAddOutlined } from "@mui/icons-material";
+import LabeledBox from "../../LabeledBox";
 
-const tasksList = [
-  { name: "Corte", color: colors.blue },
-  { name: "Barba", color: colors.danger },
-  { name: "Tatoo", color: colors.warning },
-];
+const TopButtonPad = ({ name, backgroundColor, icon }) => {
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        marginRight: "1vh",
+        marginLeft: "1vh",
+      }}>
+      <Box
+        boxShadow={3}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          backgroundColor: backgroundColor,
+          borderRadius: "2vh",
+          padding: "2vh",
+        }}>
+        <IconButton sx={{ color: colors.white }}>{icon}</IconButton>
+      </Box>
+      <Typography variant="button">{name}</Typography>
+    </Box>
+  );
+};
 
 function Attendees() {
   return (
@@ -17,27 +39,30 @@ function Attendees() {
         display: "flex",
         flex: 8,
         flexDirection: "column",
+        alignItems: "flex-end",
         p: 2,
       }}>
-      <Typography variant="h6">Cliente Atual</Typography>
-      <Card
-        title="João da Silva"
-        imgUrl="avatar2.jpg"
-        tasksList={tasksList}
-        isActive={true}></Card>
-      <Box sx={{ marginTop: "5vh" }}>
-        <Typography variant="h6">Fila de Atendimento</Typography>
-        <Card
-          title="Pedro Hertal"
-          imgUrl="avatar3.jpg"
-          tasksList={[{ name: "Corte", color: colors.blue }]}
-          style={{ opacity: 0.7 }}></Card>
-        <Card
-          title="Marcelo Bonfá Rosa"
-          imgUrl="avatar4.jpg"
-          tasksList={[{ name: "Tatoo", color: colors.warning }]}
-          style={{ opacity: 0.7, marginTop: "2vh" }}></Card>
-      </Box>
+      <LabeledBox title="Ações">
+        <TopButtonPad
+          name="Novo"
+          backgroundColor={colors.warning}
+          icon={<PersonAddOutlined />}
+        />
+        <TopButtonPad
+          name="Avulso"
+          backgroundColor={colors.blue}
+          icon={<FlashAutoOutlined />}
+        />
+      </LabeledBox>
+      <LabeledBox
+        title="Atendimentos Pendentes"
+        sx={{
+          display: "flex",
+          flex: 1,
+          minWidth: "100%",
+          alignSelf: "flex-start",
+          marginTop: "2vh",
+        }}></LabeledBox>
     </Box>
   );
 }

@@ -5,13 +5,25 @@ import {
   Button,
   Chip,
   IconButton,
+  Tooltip,
   Typography,
 } from "@mui/material";
 
-import { AddCircleOutline, CalendarMonthOutlined } from "@mui/icons-material";
+import {
+  AddCircleOutline,
+  CalendarMonthOutlined,
+  CheckCircleOutlined,
+  HourglassBottomOutlined,
+  HourglassFullOutlined,
+  HourglassTopOutlined,
+  TimerOutlined,
+} from "@mui/icons-material";
 
 import { CardContainer, TagsComponent } from "./styles";
 import colors from "../../../config/colors";
+
+const startTime = "19:35";
+const duration = "40min";
 
 function Card({
   title,
@@ -30,6 +42,7 @@ function Card({
 
   return (
     <CardContainer isActive={isActive} {...others}>
+      {isActive && <CheckCircleOutlined color="success" />}
       {imgUrl && (
         <Avatar
           src={imgSource}
@@ -71,8 +84,13 @@ function Card({
             display: "flex",
             flex: 1,
             alignSelf: "flex-end",
+            alignItems: "flex-start",
           }}>
-          <CalendarMonthOutlined sx={{ color: colors.dark }} />
+          <Tooltip title="Cliente Agendado">
+            <CalendarMonthOutlined
+              sx={{ color: colors.strong, marginRight: "3vh" }}
+            />
+          </Tooltip>
         </Box>
         <Box
           sx={{
@@ -81,7 +99,7 @@ function Card({
             alignItems: "flex-end",
           }}>
           <Button
-            variant="contained"
+            variant="outlined"
             disableElevation
             size="medium"
             color="success"
@@ -89,10 +107,10 @@ function Card({
             Fechar Comanda
           </Button>
           <Button
-            variant="contained"
+            variant="outlined"
             disableElevation
             size="medium"
-            sx={{ marginLeft: "1vh", backgroundColor: colors.danger }}>
+            sx={{ marginLeft: "1vh", color: colors.danger }}>
             Cancelar Atendimento
           </Button>
         </Box>
