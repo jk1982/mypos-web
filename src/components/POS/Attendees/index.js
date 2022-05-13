@@ -77,7 +77,7 @@ const scheduledClients = [
     visitCount: 22,
     lastVisit: "1649716782",
     scheduled: true,
-    scheduledTo: "1652277600",
+    scheduledTo: "1652364000",
     estimatedDuration: 60,
   },
   {
@@ -87,7 +87,7 @@ const scheduledClients = [
     visitCount: 22,
     lastVisit: "1649716782",
     scheduled: true,
-    scheduledTo: "1652288400",
+    scheduledTo: "1652374800",
     estimatedDuration: 30,
   },
   {
@@ -100,7 +100,7 @@ const scheduledClients = [
     visitCount: 22,
     lastVisit: "1649716782",
     scheduled: true,
-    scheduledTo: "1652385600",
+    scheduledTo: "1652472000",
     estimatedDuration: 60,
   },
 ];
@@ -184,49 +184,53 @@ function Attendees() {
         }}>
         <LabeledBox
           title="Fila Atual"
-          sx={{ display: "flex", flex: 1, p: "1vh" }}>
-          {pendingClients.map(cli => (
-            <Box
-              key={cli.name}
-              sx={{
-                marginRight: "1vh",
-                display: "flex",
-                flexDirection: "column",
-                alignContent: "center",
-                alignItems: "center",
-              }}>
-              <Avatar
-                key={cli.name}
-                src={cli.imgUrl}
-                variant="circular"
-                sx={{
-                  minWidth: "7vh",
-                  minHeight: "7vh",
-                }}></Avatar>
-              <Typography variant="caption">{cli.name}</Typography>
-            </Box>
-          ))}
-        </LabeledBox>
-      </Box>
-      <Box
-        sx={{
-          p: 2,
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "flex-start",
-          justifyContent: "space-between",
-        }}>
-        <LabeledBox title="Agenda" sx={{ display: "flex", flex: 1, p: "1vh" }}>
+          sx={{ display: "flex", flex: 1, p: "1vh", marginRight: "1vh" }}>
           <Stack spacing={2}>
-            <Divider>Hoje</Divider>
+            {pendingClients.map(cli => (
+              <AtendeeCard
+                key={cli.name}
+                itle={cli.name}
+                imgUrl={cli.imgUrl}
+                tasksList={cli.tasks}
+                scheduled={cli.scheduled}
+                pending={true}
+              />
+            ))}
+          </Stack>
+        </LabeledBox>
+
+        <LabeledBox title="Agendados" sx={{ display: "flex", p: "1vh" }}>
+          <Stack spacing={2}>
             {scheduledClients
               .filter(
                 x =>
                   moment.unix(x.scheduledTo).toDate().getDay() ===
                   new Date().getDay(),
               )
+              .sort(x => x.scheduledTo)
               .map(item => (
-                <Paper key={item.name}>{item.name}</Paper>
+                <Box
+                  key={item.name}
+                  sx={{
+                    marginRight: "1vh",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignContent: "center",
+                    alignItems: "center",
+                  }}>
+                  <Typography variant="caption" sx={{ fontWeight: "700" }}>
+                    {moment.unix(item.scheduledTo).format("HH:mm")}
+                  </Typography>
+                  <Avatar
+                    key={item.name}
+                    src={item.imgUrl}
+                    variant="circular"
+                    sx={{
+                      minWidth: "7vh",
+                      minHeight: "7vh",
+                    }}></Avatar>
+                  <Typography variant="caption">{item.name}</Typography>
+                </Box>
               ))}
           </Stack>
         </LabeledBox>

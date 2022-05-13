@@ -34,19 +34,19 @@ function AtendeeCard({
   imgUrl = null,
   tasksList = [],
   scheduled = false,
+  pending = false,
   ...others
 }) {
   return (
     <CardContainer {...others}>
-      {imgUrl && (
-        <Avatar
-          src={imgUrl}
-          variant="circular"
-          sx={{
-            minWidth: "10vh",
-            minHeight: "10vh",
-          }}></Avatar>
-      )}
+      <Avatar
+        src={imgUrl}
+        variant="circular"
+        sx={{
+          minWidth: "10vh",
+          minHeight: "10vh",
+        }}></Avatar>
+
       {tasksList && (
         <Box>
           <Typography>{title}</Typography>
@@ -95,13 +95,23 @@ function AtendeeCard({
             alignSelf: "flex-end",
             alignItems: "flex-end",
           }}>
-          <Button
-            variant="outlined"
-            disableElevation
-            size="medium"
-            color="success">
-            Fechar Comanda
-          </Button>
+          {pending ? (
+            <Button
+              variant="outlined"
+              disableElevation
+              size="medium"
+              color="info">
+              Atender
+            </Button>
+          ) : (
+            <Button
+              variant="outlined"
+              disableElevation
+              size="medium"
+              color="success">
+              Fechar Comanda
+            </Button>
+          )}
           <Button
             variant="outlined"
             disableElevation

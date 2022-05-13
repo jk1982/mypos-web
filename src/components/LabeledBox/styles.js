@@ -11,7 +11,7 @@ export const Container = styled(Box)`
 `;
 
 export const Label = styled.span`
-  position: fixed;
+  position: absolute;
   background-color: ${colors.background};
   font-weight: 700;
   font-variant: small-caps;
