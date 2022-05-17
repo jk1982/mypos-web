@@ -62,8 +62,8 @@ const ticket = {
   client: currentClient,
   attendee: currentAtendee,
   tasks: [
-    { id: 1, name: "Corte", price: 50.0, discount: 0 },
-    { id: 2, name: "Barba", price: 30.0, discount: 0 },
+    { id: 1, name: "Corte", price: 50.0, qtde: 1, discount: 0 },
+    { id: 2, name: "Barba", price: 30.0, qtde: 1, discount: 0 },
   ],
 };
 
@@ -99,26 +99,7 @@ function POS() {
             p: "1vh",
             backgroundColor: "#C9CEDA",
           }}>
-          <Box sx={{ display: "flex", flexDirection: "column", flex: 1 }}>
-            <IconButton
-              size="small"
-              style={{
-                display: "flex",
-                justifyContent: "flex-end",
-              }}>
-              <PrintOutlined />
-            </IconButton>
-            <Typography>Ticket Atend. nº: 1234567</Typography>
-            <Typography>Cliente -------------- {currentClient.name}</Typography>
-            <Typography>
-              Colab.&nbsp;&nbsp;-------------- {currentAtendee.name}
-            </Typography>
-            <Typography>SubTotal -------------- 80.00</Typography>
-            <br />
-            <br />
-            <Typography>Total ------------------ 80.00</Typography>
-          </Box>
-          <Keyboard />
+          <Box sx={{ display: "flex", flexDirection: "column", flex: 1 }}></Box>
         </Box>
       </Box>
     </>

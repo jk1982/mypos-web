@@ -5,11 +5,16 @@ import {
   IconButton,
   InputAdornment,
   Stack,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
   TextField,
 } from "@mui/material";
-import { RemoveCircle, SearchOutlined } from "@mui/icons-material";
+import { AddCircle, RemoveCircle, SearchOutlined } from "@mui/icons-material";
 
-import { Container, TaskCard } from "./styles";
+import { Container } from "./styles";
 import colors from "../../../config/colors";
 
 function formatValueToPrice(value) {
@@ -42,7 +47,6 @@ function CheckoutItensArea({ ticket, ...others }) {
             sx: {
               borderRadius: "1vh",
               backgroundColor: colors.light,
-              mb: "3vh",
               padding: 0,
             },
             endAdornment: (
@@ -54,20 +58,46 @@ function CheckoutItensArea({ ticket, ...others }) {
             ),
           }}
         />
-        {ticket.tasks.map(task => (
-          <TaskCard key={task.id}>
-            <h3 sx={{ fontWeight: "bold" }}>{task.name}</h3>
-            <h4>{formatValueToPrice(task.price)}</h4>
-            <Stack direction="row" spacing={1}>
-              <IconButton
-                size="medium"
-                color="error"
-                sx={{ backgroundColor: colors.white }}>
-                <RemoveCircle fontSize="inherit" />
-              </IconButton>
-            </Stack>
-          </TaskCard>
-        ))}
+        <Table style={{ fontFamily: "Quicksand" }}>
+          <TableHead>
+            <TableRow>
+              <TableCell></TableCell>
+              <TableCell align="right">Preço Unit.</TableCell>
+              <TableCell align="right">Qtde</TableCell>
+              <TableCell align="right">Total</TableCell>
+              <TableCell></TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {ticket.tasks.map(task => (
+              <TableRow
+                key={task.id}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                <TableCell
+                  component="th"
+                  scope="row"
+                  style={{ fontWeight: "bold", fontSize: "11pt" }}>
+                  {task.name}
+                </TableCell>
+                <TableCell align="right">
+                  {formatValueToPrice(task.price - task.discount)}
+                </TableCell>
+                <TableCell align="right">{task.qtde}</TableCell>
+                <TableCell align="right" style={{ fontWeight: "bold" }}>
+                  {formatValueToPrice(task.price * task.qtde)}
+                </TableCell>
+                <TableCell align="right">
+                  <IconButton size="medium" color="error">
+                    <RemoveCircle fontSize="inherit" />
+                  </IconButton>
+                  <IconButton size="medium" color="success">
+                    <AddCircle fontSize="inherit" />
+                  </IconButton>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </Stack>
       <div style={{ alignContent: "flex-end" }}>
         <Stack spacing={1}>
@@ -106,7 +136,9 @@ function CheckoutItensArea({ ticket, ...others }) {
 
             <Grid item xs={6}>
               <Grid container spacing={1}>
-                <Grid item xs={4}>
+                <Grid item xs={12} />
+                <Grid item xs={12} />
+                <Grid item xs={4} sx={{ textAlign: "right" }}>
                   <h1>Total</h1>
                 </Grid>
                 <Grid item xs={8}>

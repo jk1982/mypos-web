@@ -18,10 +18,11 @@ export const Container = styled.div`
   h3 {
     font-weight: bold;
     margin: 0;
+    padding: 0;
   }
 
   h2 {
-    font-size: 2vh;
+    font-size: 12pt;
   }
 `;
 
@@ -30,13 +31,14 @@ export const TaskCard = styled.div`
   align-items: center;
   align-content: center;
   justify-content: space-between;
-  background-color: ${colors.success};
-  color: ${colors.white};
   padding: 1vh;
-  border-radius: 1vh;
 
   h3,
   h4 {
     margin: 0;
+  }
+
+  h3 {
+    font-weight: bold;
   }
 `;

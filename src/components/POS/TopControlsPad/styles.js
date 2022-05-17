@@ -9,7 +9,7 @@ export const Container = styled.div`
   margin-bottom: 1vh;
   background-color: ${colors.white};
   border-radius: 1vh;
-  padding: 1vh;
+  padding: 2vh;
   ${() => sx({ boxShadow: 5 })}
 `;
 
@@ -20,8 +20,8 @@ export const PersonCard = styled.div`
   margin-bottom: 1vh;
 
   button {
-    align-self: flex-start;
-    margin-left: 5vh;
+    align-self: flex-end;
+    margin-left: 1vh;
   }
 
   h5 {
@@ -34,6 +34,7 @@ export const PersonCard = styled.div`
   h6 {
     margin: 0;
     font-weight: bold;
+    font-size: 9pt;
   }
   ${".MuiAvatar-root"} {
     min-height: 5vh;
