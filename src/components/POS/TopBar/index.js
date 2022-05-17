@@ -1,69 +1,72 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
+import { AppBar, Avatar, Button, Stack, Typography } from "@mui/material";
 
-import colors from "../../../config/colors";
-import TopAvatarMenu from "../../Dashboard/TopAvatarMenu";
-
-const Status = ({ ...style }) => {
-  //faz a consulta aos serviços e banco
-
-  return (
-    <Typography sx={{ color: colors.success, fontWeight: "bold" }} {...style}>
-      On-Line
-    </Typography>
-  );
-};
+import { Container, StatusLabel } from "./styles";
 
 export default function TopBar({ title }) {
   const navigate = useNavigate();
+  const status = "On-Line";
+  const loggedUser = {
+    name: "João da Silva",
+    imgUrl: "https://randomuser.me/api/portraits/men/18.jpg",
+  };
 
   return (
-    <AppBar
-      position="fixed"
-      elevation={0}
-      sx={{
-        "& .MuiToolbar-root": {
-          borderBottom: "1px dashed rgba(193, 193, 193, 0.4)",
-        },
-      }}>
-      <Toolbar
-        sx={{
-          backgroundColor: colors.background,
-          color: colors.dark,
-          flex: 1,
-        }}>
-        <Box
-          sx={{
-            display: "flex",
-            flex: 1,
-            justifyContent: "space-between",
-          }}>
-          <Typography variant="h6" sx={{ flex: 4 }} noWrap>
-            {title}
-            <Typography noWrap sx={{ flex: 2 }}>
-              POS - Frente de Loja
+    <AppBar position="fixed" elevation={0}>
+      <Container>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          sx={{ flex: 1 }}>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            alignContent="flex-start"
+            spacing={1}>
+            <Avatar
+              src={loggedUser.imgUrl}
+              alt={loggedUser.name}
+              variant="circular"
+              sx={{
+                minWidth: "5vh",
+                minHeight: "5vh",
+                boxShadow: 3,
+              }}
+            />
+            <Typography variant="caption" fontWeight="bold">
+              {loggedUser.name}
             </Typography>
-          </Typography>
-          <Status style={{ flex: 2 }} />
-          <Box
-            sx={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}>
+          </Stack>
+          <Stack
+            direction="column"
+            justifyContent="space-around"
+            alignItems="center">
+            <Typography variant="h6" noWrap>
+              {title}
+            </Typography>
+            <Typography noWrap>POS - Frente de Loja</Typography>
+          </Stack>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            alignContent="flex-end"
+            spacing={2}>
+            <StatusLabel>{status}</StatusLabel>
             <Button
               variant="contained"
               disableElevation
               size="medium"
               color="warning"
-              sx={{ marginTop: "1vh" }}
               onClick={() => navigate("/")}>
               Sair
             </Button>
-          </Box>
-          <TopAvatarMenu />
-        </Box>
-      </Toolbar>
+          </Stack>
+        </Stack>
+      </Container>
     </AppBar>
   );
 }

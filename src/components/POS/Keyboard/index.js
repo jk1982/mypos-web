@@ -3,6 +3,7 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import NumberFormat from "react-number-format";
 import colors from "../../../config/colors";
+import { KeyboardBackspace, KeyboardReturn } from "@mui/icons-material";
 
 const NumberFormatCustom = React.forwardRef(function NumberFormatCustom(
   props,
@@ -36,7 +37,7 @@ NumberFormatCustom.propTypes = {
 };
 
 const NumberButton = ({
-  text,
+  children,
   flex = 1,
   fontSize = 22,
   buttonColor = colors.dark,
@@ -54,7 +55,7 @@ const NumberButton = ({
         }}
         {...others}>
         <Typography fontSize={fontSize} fontWeight="bold" color={buttonColor}>
-          {text}
+          {children}
         </Typography>
       </Button>
     </Box>
@@ -76,13 +77,7 @@ const NumberButtonContainer = ({ children }) => {
 
 function Keyboard({ ...style }) {
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        padding: "4vh",
-      }}
-      {...style}>
+    <Box {...style}>
       <Box
         sx={{
           display: "flex",
@@ -108,7 +103,6 @@ function Keyboard({ ...style }) {
           sx={{ display: "flex", flex: 1, mb: "1vh" }}
         />
       </Box>
-
       <Box
         sx={{
           display: "flex",
@@ -122,27 +116,27 @@ function Keyboard({ ...style }) {
             justifyContent: "space-between",
           }}>
           <NumberButtonContainer>
-            <NumberButton text="7" />
-            <NumberButton text="8" />
-            <NumberButton text="9" />
+            <NumberButton>7</NumberButton>
+            <NumberButton>8</NumberButton>
+            <NumberButton>9</NumberButton>
           </NumberButtonContainer>
 
           <NumberButtonContainer>
-            <NumberButton text="4" />
-            <NumberButton text="5" buttonColor={colors.blue} />
-            <NumberButton text="6" />
+            <NumberButton>4</NumberButton>
+            <NumberButton buttonColor={colors.blue}>5</NumberButton>
+            <NumberButton>6</NumberButton>
           </NumberButtonContainer>
 
           <NumberButtonContainer>
-            <NumberButton text="1" />
-            <NumberButton text="2" />
-            <NumberButton text="3" />
+            <NumberButton>1</NumberButton>
+            <NumberButton>2</NumberButton>
+            <NumberButton>3</NumberButton>
           </NumberButtonContainer>
 
           <NumberButtonContainer>
-            <NumberButton text="00" />
-            <NumberButton text="0" />
-            <NumberButton text="," />
+            <NumberButton>00</NumberButton>
+            <NumberButton>0</NumberButton>
+            <NumberButton>,</NumberButton>
           </NumberButtonContainer>
         </Box>
 
@@ -152,32 +146,29 @@ function Keyboard({ ...style }) {
             flexDirection: "column",
             justifyContent: "space-between",
           }}>
-          <NumberButton text="<" buttonColor={colors.danger} flex={4} />
-          <NumberButton
-            text="2x"
-            buttonColor={colors.blue}
-            fontSize={16}
-            flex={3}
-            style={{ marginTop: 10, marginBottom: 10 }}
-          />
-          <NumberButton
-            text="%"
-            buttonColor={colors.warning}
-            fontSize={26}
-            flex={4}
-          />
+          <NumberButton buttonColor={colors.danger}>
+            <KeyboardBackspace fontSize="large" />
+          </NumberButton>
+          <NumberButton buttonColor={colors.warning} fontSize={22} flex={2}>
+            %
+          </NumberButton>
+          <NumberButton buttonColor={colors.blue} flex={4}>
+            <KeyboardReturn />
+          </NumberButton>
         </Box>
       </Box>
-
       <Box
         sx={{
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
-          marginTop: "1vh",
         }}>
-        <NumberButton text="Cancelar" buttonColor={colors.warning} flex={0} />
-        <NumberButton text="Concluir" buttonColor={colors.danger} flex={0} />
+        <NumberButton buttonColor={colors.danger} flex={0}>
+          Cancelar
+        </NumberButton>
+        <NumberButton buttonColor={colors.success} flex={0}>
+          Concluir
+        </NumberButton>
       </Box>
     </Box>
   );
