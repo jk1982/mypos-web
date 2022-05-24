@@ -1,16 +1,16 @@
 import React from "react";
-import { PrintOutlined } from "@mui/icons-material";
-import { Box, IconButton, Stack, Typography } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 
 import colors from "../../config/colors";
 import useAppBarHeight from "../../hooks/useAppBarHeight";
 
 import PropTypes from "prop-types";
 import NumberFormat from "react-number-format";
-import Keyboard from "../../components/POS/Keyboard";
 import CheckoutItensArea from "../../components/POS/CheckoutItensArea";
 import TopBar from "../../components/POS/TopBar";
 import TopControlsPad from "../../components/POS/TopControlsPad";
+import RightControlsPad from "../../components/POS/RightControlsPad";
+
 const NumberFormatCustom = React.forwardRef(function NumberFormatCustom(
   props,
   ref,
@@ -90,17 +90,7 @@ function POS() {
           <TopControlsPad ticket={ticket} />
           <CheckoutItensArea ticket={ticket} />
         </Stack>
-        <Box
-          sx={{
-            display: "flex",
-            flex: 2,
-            flexDirection: "column",
-            mb: "1vh",
-            p: "1vh",
-            backgroundColor: "#C9CEDA",
-          }}>
-          <Box sx={{ display: "flex", flexDirection: "column", flex: 1 }}></Box>
-        </Box>
+        <RightControlsPad style={{ flex: 2 }} />
       </Box>
     </>
   );
