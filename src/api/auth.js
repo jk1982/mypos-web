@@ -17,7 +17,7 @@ const reset = (email, token, password, passwordConfirmation) => {
   });
 };
 
-const verifyResetToken = (email, token) => {
+const verifyResetPasswordToken = (email, token) => {
   return apiClient.post("auth/verify-reset-token/", { email, token });
 };
 
@@ -25,5 +25,5 @@ export default {
   signin,
   recovery,
   reset,
-  verifyResetToken,
+  verifyResetPasswordToken,
 };

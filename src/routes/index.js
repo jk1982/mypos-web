@@ -1,30 +1,40 @@
-import React, { useState } from "react";
-import moment from "moment";
+import React, { Suspense } from "react";
+import { Route, Routes } from "react-router-dom";
 
-import AuthContext from "../auth/context";
-import cache from "../utils/cache";
+import { AuthProvider, ProtectedRoute } from "../auth/AuthProvider";
 
-import { ApplicationRoutes } from "./ApplicationRoutes";
-import { AuthenticationRoutes } from "./AuthenticationRoutes";
+const Dashboard = React.lazy(() => import("../pages/Dashboard"));
+const Login = React.lazy(() => import("../pages/Login"));
+import NotFound from "../pages/NotFound";
+const POS = React.lazy(() => import("../pages/POS"));
 
 function AppRoutes() {
-  const [user, setUser] = useState();
-
-  if (!user) {
-    let userCache = cache.get(cache.keys.currentUser);
-
-    if (userCache) {
-      let expireDate = moment.unix(userCache.exp).toDate();
-
-      if (expireDate < Date.now()) cache.remove(cache.keys.currentUser);
-      else setUser(userCache);
-    }
-  } else cache.store(cache.keys.currentUser, user);
-
   return (
-    <AuthContext.Provider value={[user, setUser]}>
-      {!user ? <ApplicationRoutes /> : <AuthenticationRoutes />}
-    </AuthContext.Provider>
+    <AuthProvider>
+      <Suspense fallback={<div>Carregando...</div>}>
+        <Routes>
+          <Route index element={<Login />} />
+          <Route path="/" element={<Login />} />
+          <Route
+            path="dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="POS"
+            element={
+              <ProtectedRoute>
+                <POS />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
+    </AuthProvider>
   );
 }
 

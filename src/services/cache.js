@@ -3,8 +3,6 @@ import moment from "moment";
 const prefix = "cache.";
 const expiryInMinutes = 5;
 
-const keys = { currentUser: "currentUser" };
-
 const store = (key, value) => {
   try {
     const item = {
@@ -70,5 +68,4 @@ export default {
   store,
   remove,
   prefix,
-  keys,
 };
