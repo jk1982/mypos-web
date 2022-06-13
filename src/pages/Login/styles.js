@@ -10,6 +10,7 @@ export const Container = styled.div`
   align-items: center;
   align-content: center;
   position: relative;
+  background-color: ${colors.light};
 
   #logo {
     font-size: 18vh;
@@ -30,7 +31,8 @@ export const Container = styled.div`
   #main {
     position: absolute;
     left: 50%;
-    top: 30%;
-    transform: translate(-50%, -30%);
+    top: 20%;
+    transform: translate(-50%, -20%);
+    width: 30vh;
   }
 `;

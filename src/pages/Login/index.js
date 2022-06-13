@@ -1,25 +1,23 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import {
-  Box,
   Button,
   FormControl,
   FormHelperText,
-  Icon,
   IconButton,
   Input,
   InputAdornment,
   InputLabel,
   Stack,
   TextField,
-  Typography,
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 import { Container } from "./styles";
 import { ContentCut } from "@mui/icons-material";
+import useAuth from "../../hooks/useAuth";
 
 let schema = Yup.object().shape({
   email: Yup.string()
@@ -32,6 +30,7 @@ let schema = Yup.object().shape({
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
+  const { onLogin } = useAuth();
 
   const formik = useFormik({
     initialValues: { email: "", password: "" },
@@ -39,8 +38,8 @@ function Login() {
     validateOnChange: false,
     validateOnBlur: false,
 
-    onSubmit: (values, { validate }) => {
-      validate();
+    onSubmit: values => {
+      onLogin(values.email, values.password);
     },
   });
 
@@ -65,7 +64,7 @@ function Login() {
         <form
           onSubmit={formik.handleSubmit}
           onKeyDown={event => event.key === "Enter" && formik.handleSubmit()}>
-          <Stack>
+          <Stack spacing={1}>
             <TextField
               label="E-mail"
               id="email"
@@ -98,7 +97,7 @@ function Login() {
               />
               <FormHelperText error>{formik.errors.password}</FormHelperText>
             </FormControl>
-            <Stack mt={2} spacing={1}>
+            <Stack pt={2} spacing={1}>
               <Button
                 variant="outlined"
                 color="success"

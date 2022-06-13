@@ -1,6 +1,7 @@
 import apiClient from "./client";
 
 const signin = (email, password) => {
+  console.log("foi?");
   return apiClient.post("auth/signin/", { email, password });
 };
 

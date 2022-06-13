@@ -31,4 +31,4 @@ const ProtectedOutlet = () => {
   return <Outlet />;
 };
 
-export { AuthProvider, ProtectedRoute, ProtectedOutlet };
+export { AuthContext, AuthProvider, ProtectedRoute, ProtectedOutlet };
