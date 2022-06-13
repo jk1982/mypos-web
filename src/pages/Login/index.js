@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import {
@@ -17,6 +17,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 import { Container } from "./styles";
 import { ContentCut } from "@mui/icons-material";
+
 import useAuth from "../../hooks/useAuth";
 
 let schema = Yup.object().shape({
